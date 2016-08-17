@@ -1,40 +1,33 @@
 class Email < ApplicationRecord
 
   def as_json(options={})
-    super(only: [:address,
-                 :email_type,
-                 :event,
-                 :timestamp])
+    super(only: [:Address,
+                 :EmailType,
+                 :Event,
+                 :Timestamp])
 
   end
 
-  def self.sent
-    Email.where(event: "send").size
-  end
-
-  def self.opened
-    Email.where(event: "open").size
-  end
-
-  def self.clicked
-    Email.where(event: "click").size
-  end
-
-  def self.find_total(email_type)
-    Email.where(email_type: email_type).size
+  def self.find_total_number(query_type)
+    Email.where(query_type).size
   end
 
   def self.find_total_event(email_type, event_type)
-    Email.where(email_type: email_type, event: event_type).size
+    Email.where(EmailType: email_type, Event: event_type).size
   end
 
+  def self.find_event_percentage(email_type, event_type)
+    self.find_total_event(email_type, event_type).to_f / self.find_total_number(EmailType: email_type).to_f
+  end
 
-  # def self.create_open_rate_hash
-  #   open_rate = {}
-  #   Email.all.each do |email|
-  #     !open_rate.has_key?(email.email_type)
-  #   end
-  #
-  # end
+  def self.create_hash_for(event_type)
+    requested_rate = {}
+    Email.all.each do |email|
+      if !requested_rate.has_key?(email.EmailType)
+        requested_rate[email.EmailType.to_sym] = self.find_event_percentage(email.EmailType, event_type)
+      end
+    end
+    requested_rate
+  end
 
 end

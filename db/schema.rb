@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20160817130412) do
   enable_extension "plpgsql"
 
   create_table "emails", force: :cascade do |t|
-    t.string   "address"
-    t.string   "email_type"
-    t.string   "event"
-    t.string   "timestamp"
+    t.string   "Address"
+    t.string   "EmailType"
+    t.string   "Event"
+    t.string   "Timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
