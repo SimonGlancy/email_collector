@@ -19,8 +19,7 @@ describe EmailsController, 'testing emails' do
   end
 
   it 'allows a new email to be added', type: :request do
-    post '/emails.json', email:@new_email_params
-    json = JSON.parse(response.body)
+    post '/emails', email:@new_email_params
     expect(Email.last.Address).to eq('barry@test.com')
   end
 

@@ -3,22 +3,16 @@ class EmailsController < ApplicationController
   respond_to :json
 
   def index
-    @data = {emails_sent: Email.find_total_number(Event: "send"),
-             emails_opened: Email.find_total_number(Event: "open"),
-             emails_clicked: Email.find_total_number(Event: "click"),
-             open_rate: Email.create_hash_for("open"),
-             click_rate: Email.create_hash_for("click")}
-
-    render json: @data
+    render json: Email.create_response
   end
 
   def create
-    respond_with Email.create(email_params)
+      json_params = JSON.parse(request.body.read)
+      respond_with Email.create(Address: json_params["Address"],
+                                EmailType: json_params["EmailType"],
+                                Event: json_params["Event"],
+                                Timestamp: json_params["Timestamp"]), status: 200
+
   end
 
-  private
-
-  def email_params
-    params.require(:email).permit(:Address, :Email_type, :Event, :Timestamp)
-  end
 end

@@ -17,7 +17,17 @@ class Email < ApplicationRecord
   end
 
   def self.find_event_percentage(email_type, event_type)
-    self.find_total_event(email_type, event_type).to_f / self.find_total_number(EmailType: email_type).to_f
+    event_total = self.find_total_event(email_type, event_type).to_f
+    email_total = self.find_total_number(EmailType: email_type).to_f
+    result =  (event_total/email_total).round(2)
+  end
+
+  def self.create_response
+    {emails_sent: self.find_total_number(Event: "send"),
+     emails_opened: self.find_total_number(Event: "open"),
+     emails_clicked: self.find_total_number(Event: "click"),
+     open_rate: self.create_hash_for("open"),
+     click_rate: self.create_hash_for("click")}
   end
 
   def self.create_hash_for(event_type)
