@@ -12,9 +12,9 @@ The app is built using Rails (v5.0.0.1) and Ruby (v2.2.2) with additional Gems r
 
 the app contains two routes:
 
-* #index - This is the get route ('/') that presents the information requested (total number of emails sent, total number of emails opened, total number of clicks, open rate per email type, click rate per email type)
+* index - This is the get route ('/') that presents the information requested (total number of emails sent, total number of emails opened, total number of clicks, open rate per email type, click rate per email type)
 
-* #create - This is a post route ('/emails') that creates a new instance in the postgresql data base Email table with the following columns( Address, EmailType, Event, Timestamp)
+* create - This is a post route ('/emails') that creates a new instance in the postgresql data base Email table with the following columns( Address, EmailType, Event, Timestamp)
 
 #### Launching the app
 The code is fully unit tested using rspec.
