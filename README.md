@@ -23,6 +23,8 @@ To launch clone repo:
 
 `$ bundle`
 
+`$ rake db:create`
+
 `$ rspec`
 
 `$ rails s`
