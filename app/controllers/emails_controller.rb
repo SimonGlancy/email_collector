@@ -11,7 +11,7 @@ class EmailsController < ApplicationController
   end
 
   def email_params
-    params.require(:email).permit(:Address, :EmailType, :Event, :Timestamp)
+    params.require(:email).permit(:address, :email_type, :event, :timestamp)
   end
 
 end

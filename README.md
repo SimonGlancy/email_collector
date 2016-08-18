@@ -23,7 +23,11 @@ To launch clone repo:
 
 `$ bundle`
 
-`$ db:create`
+`$ rake db:create`
+
+`$ rake db:migrate`
+
+`$ rake db:migrate RAILS_ENV=test`
 
 `$ rspec`
 
