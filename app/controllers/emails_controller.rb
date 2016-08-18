@@ -7,12 +7,11 @@ class EmailsController < ApplicationController
   end
 
   def create
-      json_params = JSON.parse(request.body.read)
-      respond_with Email.create(Address: json_params["Address"],
-                                EmailType: json_params["EmailType"],
-                                Event: json_params["Event"],
-                                Timestamp: json_params["Timestamp"]), status: 200
+    respond_with Email.create(email_params), status: 200
+  end
 
+  def email_params
+    params.require(:email).permit(:Address, :EmailType, :Event, :Timestamp)
   end
 
 end
